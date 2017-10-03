@@ -1,24 +1,24 @@
 """Get related files based on git history
 
 See:
-    https://github.com/hansmosh/gitrelations
+    https://github.com/hansmosh/git-relations
 """
 
 from setuptools import setup
 
 setup(
-    name='gitrelations',
+    name='git-relations',
     packages=['gitrelations'],
 
-    version='0.1.2',
+    version='0.2.0',
 
     author='Chris Brackert',
     author_email='cbrackert@gmail.com',
-    url='https://github.com/hansmosh/gitrelations',
+    url='https://github.com/hansmosh/git-relations',
 
     entry_points={
         'console_scripts': [
-            'gitrelations=gitrelations.main:main',
+            'git-relations=gitrelations.main:main',
         ],
     },
 )
