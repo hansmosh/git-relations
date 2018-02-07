@@ -43,15 +43,16 @@ def _relations():
           shared a git commit and the number of times.
     """
     relations = defaultdict(lambda: defaultdict(int))
-    for i in range(100):
+    git_log = "git log -n 100 --format=%h"
+    process = subprocess.Popen(git_log.split(), stdout=subprocess.PIPE)
+    commit_ids = [commit_id for commit_id in
+                  process.communicate()[0].decode().split('\n') if commit_id]
+    for commit_id in commit_ids:
         git_command = ("git diff-tree --no-commit-id --name-only -r "
-                       "HEAD{}..HEAD{}".format("^"*(i+1), "^"*i))
+                       "{}".format(commit_id))
         process = subprocess.Popen(git_command.split(), stdout=subprocess.PIPE)
         output = [filename for filename in
                   process.communicate()[0].decode().split('\n') if filename]
-        if not output:
-            # fix: break on last commit, not just any commit with nothing
-            break
         for fromfile in output:
             for tofile in output:
                 if fromfile != tofile and tofile not in IGNORE_FILE_LIST:
