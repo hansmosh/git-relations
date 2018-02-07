@@ -43,7 +43,7 @@ def _relations():
           shared a git commit and the number of times.
     """
     relations = defaultdict(lambda: defaultdict(int))
-    git_log = "git log -n 100 --format=%h"
+    git_log = "git log -n 1000 --format=%h"
     process = subprocess.Popen(git_log.split(), stdout=subprocess.PIPE)
     commit_ids = [commit_id for commit_id in
                   process.communicate()[0].decode().split('\n') if commit_id]
